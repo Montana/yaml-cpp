@@ -4,4 +4,4 @@ script:
  - mkdir build
  - cd build
  - cmake .. -G"Visual Studio 15 2017"
- - "C:\Program Files\Microsoft Visual Studio\2017\Community\Msbuild\Current\Bin\MSBuild.exe" YAML_CPP.sln
+ - "C:\\Program Files\\Microsoft Visual Studio\\2017\\Community\\Msbuild\\Current\\Bin\\MSBuild.exe" YAML_CPP.sln
