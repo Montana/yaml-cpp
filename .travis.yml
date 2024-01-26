@@ -1,5 +1,7 @@
 os: linux
 language: c++
 script: 
+ - mkdir build
+ - cd build
  - cmake .. -G"Unix Makefiles"
 
