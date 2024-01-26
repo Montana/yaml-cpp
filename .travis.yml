@@ -1,8 +1,6 @@
-os: linux
+os: windows
 language: c++
 script: 
  - mkdir build
  - cd build
- - cmake .. -G"Unix Makefiles"
- - make
-
+ - cmake .. -G"Visual Studio 17 2022"
