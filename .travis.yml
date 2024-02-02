@@ -1,11 +1,10 @@
-os: windows
+os: linux
 services:
   - docker
 language: c++
 script: 
  - mkdir build
  - cd build
- - cmake .. -G"Visual Studio 17 2022"
- - cd ..
- - ./build.bat
+ - cmake .. -G"Unix Makefiles"
+ - make
  
