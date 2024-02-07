@@ -8,7 +8,13 @@ matrix:
         - cd build
         - cmake .. -G "Visual Studio 15 2017"
         - cd ..
-        - ./build.bat
+        - ./build.bat Debug
+      script:
+        - mkdir build
+        - cd build
+        - cmake .. -G "Visual Studio 15 2017"
+        - cd ..
+        - ./build.bat Release        
 
     - os: linux
       dist: xenial
@@ -17,4 +23,5 @@ matrix:
         - cd build
         - cmake .. -G "Unix Makefiles"
         - make
+      
         
