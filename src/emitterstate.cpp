@@ -109,7 +109,6 @@ EmitterNodeType::value EmitterState::NextGroupType(
 
   // can't happen
   assert(false);
-  return EmitterNodeType::NoType;
 }
 
 void EmitterState::StartedDoc() {
