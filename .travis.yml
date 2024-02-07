@@ -13,9 +13,9 @@ matrix:
       script:
         - mkdir build
         - cd build
-        - cmake .. -G "Visual Studio 15 2017"
+        - cmake .. -G "Visual Studio 15 2017 Win64"
         - cd ..
-        - ./build.bat Debug x64
+        - ./build.bat Debug Win64
     - os: windows        
       script:
         - mkdir build
@@ -27,9 +27,9 @@ matrix:
       script:
         - mkdir build
         - cd build
-        - cmake .. -G "Visual Studio 15 2017"
+        - cmake .. -G "Visual Studio 15 2017 Win64"
         - cd ..
-        - ./build.bat Release x64
+        - ./build.bat Release Win64
     - os: linux
       dist: xenial
       script:
