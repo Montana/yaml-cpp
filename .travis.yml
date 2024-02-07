@@ -3,33 +3,33 @@ language: cpp
 matrix:
   include:
     - os: windows
-        script:
-          - mkdir build
-          - cd build
-          - cmake .. -G "Visual Studio 15 2017"
-          - cd ..
-          - ./build.bat Debug Win32
+      script:
+        - mkdir build
+        - cd build
+        - cmake .. -G "Visual Studio 15 2017"
+        - cd ..
+        - ./build.bat Debug Win32
     - os: windows
-        script:
-          - mkdir build
-          - cd build
-          - cmake .. -G "Visual Studio 15 2017"
-          - cd ..
-          - ./build.bat Debug Win64
+      script:
+        - mkdir build
+        - cd build
+        - cmake .. -G "Visual Studio 15 2017"
+        - cd ..
+        - ./build.bat Debug Win64
     - os: windows        
-        script:
-          - mkdir build
-          - cd build
-          - cmake .. -G "Visual Studio 15 2017"
-          - cd ..
-          - ./build.bat Release Win32        
+      script:
+        - mkdir build
+        - cd build
+        - cmake .. -G "Visual Studio 15 2017"
+        - cd ..
+        - ./build.bat Release Win32        
     - os: windows        
-        script:
-          - mkdir build
-          - cd build
-          - cmake .. -G "Visual Studio 15 2017"
-          - cd ..
-          - ./build.bat Release Win64
+      script:
+        - mkdir build
+        - cd build
+        - cmake .. -G "Visual Studio 15 2017"
+        - cd ..
+        - ./build.bat Release Win64
     - os: linux
       dist: xenial
       script:
