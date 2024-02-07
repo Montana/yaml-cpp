@@ -10,7 +10,7 @@ matrix:
     - os: windows
       script:
         import:
-          - ./.travis/windowsscript.yml
+          - source: ./.travis/windowsscript.yml
         - ./build.bat Debug Win64
     - os: windows        
       script:
