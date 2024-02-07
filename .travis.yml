@@ -1,4 +1,4 @@
-language: c++
+language: cpp
 
 matrix:
   include:
@@ -11,6 +11,7 @@ matrix:
         - ./build.bat
 
     - os: linux
+      dist: xenial
       script:
         - mkdir build
         - cd build
