@@ -4,17 +4,11 @@ matrix:
   include:
     - os: windows
       script:
-        - mkdir build
-        - cd build
-        - cmake .. -G "Visual Studio 15 2017"
-        - cd ..
+        - import ./.travis/windowsscript.yml
         - ./build.bat Debug
     - os: windows        
       script:
-        - mkdir build
-        - cd build
-        - cmake .. -G "Visual Studio 15 2017"
-        - cd ..
+        - import ./.travis/windowsscript.yml
         - ./build.bat Release        
 
     - os: linux
