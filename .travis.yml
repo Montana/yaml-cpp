@@ -5,12 +5,19 @@ matrix:
     - os: windows
       script:
         - import ./.travis/windowsscript.yml
-        - ./build.bat Debug
+        - ./build.bat Debug Win32
+    - os: windows
+      script:
+        - import ./.travis/windowsscript.yml
+        - ./build.bat Debug Win64
     - os: windows        
       script:
         - import ./.travis/windowsscript.yml
-        - ./build.bat Release        
-
+        - ./build.bat Release Win32        
+    - os: windows        
+      script:
+        - import ./.travis/windowsscript.yml
+        - ./build.bat Release Win64
     - os: linux
       dist: xenial
       script:
