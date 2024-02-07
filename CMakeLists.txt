@@ -14,19 +14,21 @@ set(YAML_CPP_MAIN_PROJECT OFF)
 if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
   set(YAML_CPP_MAIN_PROJECT ON)
 endif()
+set(CMAKE_SUPPRESS_REGENERATION true)
+set(CMAKE_SKIP_INSTALL_RULES true)
 
 include(CMakePackageConfigHelpers)
 include(CMakeDependentOption)
 include(CheckCXXCompilerFlag)
-include(GNUInstallDirs)
-include(CTest)
+# include(GNUInstallDirs)
+# include(CTest)
 
 option(YAML_CPP_BUILD_CONTRIB "Enable yaml-cpp contrib in library" ON)
 option(YAML_CPP_BUILD_TOOLS "Enable parse tools" ON)
 option(YAML_BUILD_SHARED_LIBS "Build yaml-cpp shared library" ${BUILD_SHARED_LIBS})
-option(YAML_CPP_INSTALL "Enable generation of yaml-cpp install targets" ${YAML_CPP_MAIN_PROJECT})
+option(YAML_CPP_INSTALL "Enable generation of yaml-cpp install targets" OFF)
 option(YAML_CPP_FORMAT_SOURCE "Format source" ${YAML_CPP_MAIN_PROJECT})
-option(YAML_CPP_DISABLE_UNINSTALL  "Disable uninstallation of yaml-cpp" OFF)
+option(YAML_CPP_DISABLE_UNINSTALL  "Disable uninstallation of yaml-cpp" ON)
 option(YAML_USE_SYSTEM_GTEST "Use system googletest if found" OFF)
 
 cmake_dependent_option(YAML_CPP_BUILD_TESTS
@@ -35,8 +37,8 @@ cmake_dependent_option(YAML_CPP_BUILD_TESTS
 cmake_dependent_option(YAML_MSVC_SHARED_RT
   "MSVC: Build yaml-cpp with shared runtime libs (/MD)" ON
   "CMAKE_SYSTEM_NAME MATCHES Windows" OFF)
-set(YAML_CPP_INSTALL_CMAKEDIR "${CMAKE_INSTALL_LIBDIR}/cmake/yaml-cpp"
-  CACHE STRING "Path to install the CMake package to")
+# set(YAML_CPP_INSTALL_CMAKEDIR "${CMAKE_INSTALL_LIBDIR}/cmake/yaml-cpp"
+#  CACHE STRING "Path to install the CMake package to")
  
 if (YAML_CPP_FORMAT_SOURCE)
     find_program(YAML_CPP_CLANG_FORMAT_EXE NAMES clang-format)
@@ -97,7 +99,7 @@ endif()
 target_include_directories(yaml-cpp
   PUBLIC
     $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+    # $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
   PRIVATE
     $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>)
 
@@ -149,63 +151,9 @@ set_target_properties(yaml-cpp PROPERTIES
   PROJECT_LABEL "yaml-cpp ${yaml-cpp-label-postfix}"
   DEBUG_POSTFIX "${CMAKE_DEBUG_POSTFIX}")
 
-set(EXPORT_TARGETS yaml-cpp::yaml-cpp)
-configure_package_config_file(
-  "${PROJECT_SOURCE_DIR}/yaml-cpp-config.cmake.in"
-  "${PROJECT_BINARY_DIR}/yaml-cpp-config.cmake"
-  INSTALL_DESTINATION "${YAML_CPP_INSTALL_CMAKEDIR}"
-  PATH_VARS CMAKE_INSTALL_INCLUDEDIR CMAKE_INSTALL_LIBDIR)
-unset(EXPORT_TARGETS)
-
 write_basic_package_version_file(
   "${PROJECT_BINARY_DIR}/yaml-cpp-config-version.cmake"
   COMPATIBILITY AnyNewerVersion)
 
 configure_file(yaml-cpp.pc.in yaml-cpp.pc @ONLY)
 
-if (YAML_CPP_INSTALL)
-  install(TARGETS yaml-cpp
-    EXPORT yaml-cpp-targets
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
-  install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-                FILES_MATCHING PATTERN "*.h")
-  install(EXPORT yaml-cpp-targets
-    NAMESPACE yaml-cpp::
-    DESTINATION "${YAML_CPP_INSTALL_CMAKEDIR}")
-  install(FILES
-      "${PROJECT_BINARY_DIR}/yaml-cpp-config.cmake"
-      "${PROJECT_BINARY_DIR}/yaml-cpp-config-version.cmake"
-    DESTINATION "${YAML_CPP_INSTALL_CMAKEDIR}")
-  install(FILES "${PROJECT_BINARY_DIR}/yaml-cpp.pc"
-    DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
-endif()
-
-if(YAML_CPP_BUILD_TESTS)
-  add_subdirectory(test)
-endif()
-
-if(YAML_CPP_BUILD_TOOLS)
-  add_subdirectory(util)
-endif()
-
-if (YAML_CPP_FORMAT_SOURCE AND YAML_CPP_CLANG_FORMAT_EXE)
-  add_custom_target(format
-    COMMAND clang-format --style=file -i $<TARGET_PROPERTY:yaml-cpp,SOURCES>
-    COMMAND_EXPAND_LISTS
-    COMMENT "Running clang-format"
-    VERBATIM)
-endif()
-
-# uninstall target
-if(YAML_CPP_INSTALL AND NOT YAML_CPP_DISABLE_UNINSTALL AND NOT TARGET uninstall)
-  configure_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
-    IMMEDIATE @ONLY)
-
-  add_custom_target(uninstall
-    COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
-endif()
