@@ -5,7 +5,7 @@ matrix:
     - os: windows
       script:
         import: 
-          - ./.travis/windowsscript.yml
+          - source: ./.travis/windowsscript.yml
         - ./build.bat Debug Win32
     - os: windows
       script:
