@@ -181,7 +181,6 @@ class EmitterState {
       }
 
       // can't get here
-      assert(false);
     }
   };
 
