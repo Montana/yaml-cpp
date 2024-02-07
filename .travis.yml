@@ -1,7 +1,4 @@
 language: cpp
-os:
-  - windows
-  - Linux
 
 matrix:
   include:
