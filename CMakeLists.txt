@@ -16,6 +16,7 @@ if(CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR)
 endif()
 set(CMAKE_SUPPRESS_REGENERATION true)
 set(CMAKE_SKIP_INSTALL_RULES true)
+set(CMAKE_GENERATOR_PLATFORM x64)
 
 include(CMakePackageConfigHelpers)
 include(CMakeDependentOption)
