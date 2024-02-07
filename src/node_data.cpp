@@ -99,7 +99,7 @@ std::size_t node_data::size() const {
       compute_map_size();
       return m_map.size() - m_undefinedPairs.size();
     default:
-      return 0;
+      break;
   }
   return 0;
 }
