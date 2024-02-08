@@ -3,7 +3,7 @@ language: cpp
 matrix:
   include:
     - import:
-      source: ./.travis/windowsscript.yml
+      source: .travis/windowsscript.yml
       mode: deep_merge
     - os: windows
       script:
