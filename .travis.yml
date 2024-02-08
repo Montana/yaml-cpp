@@ -2,7 +2,8 @@ language: cpp
 
 matrix:
   include:
-    - import: ./.travis/windowsscript.yml
+    - import: 
+      source: ./.travis/windowsscript.yml
     - os: windows
       script:
         - mkdir build
