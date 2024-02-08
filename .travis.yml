@@ -2,13 +2,7 @@ language: cpp
 
 matrix:
   include:
-    - os: windows
-      script:
-        - mkdir build
-        - cd build
-        - cmake .. -G "Visual Studio 15 2017"
-        - cd ..
-        - ./build.bat Debug Win32
+    - import: ./.travis/windowsscript.yml
     - os: windows
       script:
         - mkdir build
