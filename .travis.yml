@@ -1,9 +1,10 @@
 language: cpp
 
-import: ./.travis/windowsscript.yml
-
 matrix:
   include:
+    - import:
+      source: ./.travis/windowsscript.yml
+      mode: deep_merge
     - os: windows
       script:
         - mkdir build
